@@ -172,7 +172,7 @@ func (c *SmartctlDiskCollector) Describe(ch chan<- *prometheus.Desc) {
 // Handle error
 func (c *SmartctlDiskCollector) Collect(ch chan<- prometheus.Metric) {
 	if desc, err := c.collect(ch); err != nil {
-		log.Debugln("[ERROR] failed collecting metric %v: %v", desc, err)
+		promlog.Debugln("[ERROR] failed collecting metric %v: %v", desc, err)
 		ch <- prometheus.NewInvalidMetric(desc, err)
 		return
 	}
@@ -187,13 +187,13 @@ func (c *SmartctlDiskCollector) collect(ch chan<- prometheus.Metric) (*prometheu
 	out, err := exec.Command("bash", "-c", cmd).CombinedOutput()
 
 	if err != nil {
-		log.Debugln("[ERROR] smart log: \n%s\n", out)
+		promlog.Debugln("[ERROR] smart log: \n%s\n", out)
 		return nil, err
 	}
 	data := parser.ParseSmartctlDisk(string(out))
 
 	if data == nil {
-		log.Fatal("Unable get data from smartctl exporter")
+		promlog.Fatal("Unable get data from smartctl exporter")
 		return nil, nil
 	}
 
