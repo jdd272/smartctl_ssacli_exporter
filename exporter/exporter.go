@@ -5,7 +5,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/jakubjastrabik/smartctl_ssacli_exporter/collector"
+	"github.com/jdd272/smartctl_ssacli_exporter/collector"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
