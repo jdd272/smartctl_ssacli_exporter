@@ -5,7 +5,7 @@ import (
 
 	"github.com/jakubjastrabik/smartctl_ssacli_exporter/parser"
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/common/log"
+	"github.com/prometheus/common/promlog"
 )
 
 var _ prometheus.Collector = &SsacliLogDiskCollector{}
