@@ -8,7 +8,7 @@ import (
 	"github.com/prometheus/common/promlog"
 )
 
-var _ prometheus.Collector = &SsacliLogDiskCollector{}
+var _ prometheus.Collector = &SsacliDiskCollector{}
 
 // SsacliLogDiskCollector Contain raid controller detail information
 type SsacliLogDiskCollector struct {
@@ -62,7 +62,7 @@ func (c *SsacliLogDiskCollector) Describe(ch chan<- *prometheus.Desc) {
 // Handle error
 func (c *SsacliLogDiskCollector) Collect(ch chan<- prometheus.Metric) {
 	if desc, err := c.collect(ch); err != nil {
-		log.Debugln("[ERROR] failed collecting metric %v: %v", desc, err)
+		promlog.Debugln("[ERROR] failed collecting metric %v: %v", desc, err)
 		ch <- prometheus.NewInvalidMetric(desc, err)
 		return
 	}
